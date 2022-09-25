@@ -3,7 +3,7 @@ from aiogram import executor
 from loader import dp
 
 
-async def on_sturtup():
+async def on_startup():
     pass
 
 
