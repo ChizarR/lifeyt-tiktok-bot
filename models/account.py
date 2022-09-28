@@ -2,9 +2,9 @@ from tortoise import fields
 from tortoise.models import Model
 
 
-class Channel(Model):
+class Account(Model):
     id = fields.BigIntField(pk=True)
-    channel_id = fields.BigIntField(unique=True)
+    account = fields.CharField(255, unique=True)
 
     class Meta:
-        table = "channels"
+        table = "accounts"
