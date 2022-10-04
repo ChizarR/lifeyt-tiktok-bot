@@ -8,7 +8,7 @@ from models import db_api
 
 
 async def send_videos_to_channels(dp: Dispatcher, 
-                                     video_cards: list[VideoInfo]):
+                                  video_cards: list[VideoInfo]):
     for card in video_cards:
         await asyncio.sleep(0.5)
         path_to_video = card.path_to_saved_video
@@ -18,12 +18,13 @@ async def send_videos_to_channels(dp: Dispatcher,
         likes = card.like_count
         shares = card.share_count
         comments = card.comment_count
-
+        link = card.tiktok_link
+        
         await dp.bot.send_video(
             chat_id=Config.CHANNEL_ID,
             video=video,
             caption=_generate_text(
-                account, likes, shares, comments
+                account, likes, shares, comments, link
             )
         )
 
@@ -31,5 +32,5 @@ async def send_videos_to_channels(dp: Dispatcher,
     
 
 def _generate_text(*args):
-    answer = f"Acc: {args[0]}\nLikes: {args[1]}\nShares: {args[2]}\nComments: {args[3]}"
+    answer = f"Acc: {args[0]}\nLikes: {args[1]}\nShares: {args[2]}\nComments: {args[3]}\nLink: {args[4]}"
     return answer
