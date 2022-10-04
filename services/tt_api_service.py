@@ -34,9 +34,13 @@ async def _download_videos(video_links: list[str] | None) -> list[VideoInfo] | N
 
     video_cards = []
     for video_link in video_links:
-        video_info = tiktok.get_video(video_link)
-        video_cards.append(video_info)
-        await db_api.add_video(video_info)
+        try:
+            video_info = tiktok.get_video(video_link)
+            video_cards.append(video_info)
+            await db_api.add_video(video_info)
+        except IndexError:
+            print(f"Link {video_link} is not avaliable...")
+            continue
 
     return video_cards
 
